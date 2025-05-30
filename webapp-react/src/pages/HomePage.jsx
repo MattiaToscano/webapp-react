@@ -1,67 +1,39 @@
-import React from 'react';
-import { useState } from 'react';
-import BookCard from '../components/BookCard';
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const initialBooks = [
+const initialMovies = [
     {
         id: 1,
         title: 'Il Signore degli Anelli',
-        author: 'J.R.R. Tolkien',
-        abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
-        imgage: 'https://picsum.photos/200/300',
+        director: 'Peter Jackson',
+        synopsis: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
+        poster: 'https://picsum.photos/200/300',
     },
-
-    {
-        id: 2,
-        title: 'Il Signore degli Anelli',
-        author: 'J.R.R. Tolkien',
-        abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
-        imgage: 'https://picsum.photos/200/300',
-    },
-
-    {
-        id: 3,
-        title: 'Il Signore degli Anelli',
-        author: 'J.R.R. Tolkien',
-        abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
-        imgage: 'https://picsum.photos/200/300',
-    },
-
-    {
-        id: 4,
-        title: 'Il Signore degli Anelli',
-        author: 'J.R.R. Tolkien',
-        abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
-        imgage: 'https://picsum.photos/200/300',
-    },
-
-    {
-        id: 5,
-        title: 'Il Signore degli Anelli',
-        author: 'J.R.R. Tolkien',
-        abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
-        imgage: 'https://picsum.photos/200/300',
-    }
+    // altri film...
 ]
 
-
 const HomePage = () => {
-    // Definisco la variabile di stato per i libri
-    const [books, setBooks] = useState(initialBooks);
+    const [movies] = useState(initialMovies);
 
     return (
-        <div>
-            <h1 className="text-primary">Bool Books </h1>
-            <h2>
-                <i>The nerdest Book </i>
-            </h2>
-            <div className="row gy-4">
-                {books.map((book) => {
-                    return <BookCard book={book} key={`book/${book.id}`} />
-                })}
+        <div className="container">
+            <h1>I nostri film</h1>
+            <div className="row g-4">
+                {movies.map((movie) => (
+                    <div className="col-12 col-md-6 col-lg-4" key={movie.id}>
+                        <div className="card h-100">
+                            <img src={movie.poster} className="card-img-top" alt={`Locandina di ${movie.title}`} />
+                            <div className="card-body">
+                                <h5 className="card-title">{movie.title}</h5>
+                                <p className="card-text">Regia: {movie.director}</p>
+                                <Link to={`/movies/${movie.id}`} className="btn btn-primary">Dettagli</Link>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default HomePage;
+export default HomePage
