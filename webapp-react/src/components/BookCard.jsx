@@ -1,6 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const BookCard = () => {
+
+
+    const { id, title, author, abstract, image } = book;
     return (
         <div className="col-12 col-md-6 col-lg-4" key={book.id}>
             <div className="card-image-top">
