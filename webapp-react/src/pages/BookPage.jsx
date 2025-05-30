@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { act, useEffect } from 'react'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -50,25 +50,33 @@ const BookPage = () => {
     const [books, setBooks] = useState(initialBooks);
 
     const [book, setBook] = useState({});
+
     //Funzione che mi recupera l'array che ha l'id uguale a quello passato come parametro
     const fetchBook = () => {
-        books.forEach((actualBook) => {
-            if (actualBook.id === parseInt(id)) {
-                setBook(actualBook);
-            }
-        });
+        // books.forEach((actualBook) => {
+        //     if (actualBook.id === parseInt(id)) {
+        //        setBook(actualBook);
+        //     }
+        //  });
     }
+
+    const findBook = book.find(actualBook => actualBook.id === parseInt(id));
+    setBook(findBook);
+
+    useEffect(() => {
+        fetchBook();
+    }, []);
 
 
     return (
         <div className="row">
             <div className="col-12 col-md-6 col-lg-4">
-                <img src="https://picsum.photos/200/300" className="img-fluid" alt="Book Cover" />
+                <img src={book.image} className="img-fluid" alt="Book Cover" />
             </div>
             <div className="col-12 col-md-6 col-lg-8">
-                <h1>Titolo</h1>
-                <p> Altre informazioni</p>
-                <h3> Sinossi</h3>
+                <h1>{book.title}</h1>
+                <p> {book.author}</p>
+                <h3>{book.ecserpt}</h3>
             </div>
         </div>
     )
