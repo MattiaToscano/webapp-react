@@ -7,7 +7,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<DefaultLayout />}>
-          <Route></Route>
+          <Route index element={<h1>Homepage</h1>}></Route>
+          <Route path="/books/:id" element={<h1>Dettaglio Pagina</h1>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
