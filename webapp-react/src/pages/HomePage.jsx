@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import BookCard from '../components/BookCard';
 
 const initialBooks = [
     {
@@ -8,7 +9,7 @@ const initialBooks = [
         title: 'Il Signore degli Anelli',
         author: 'J.R.R. Tolkien',
         abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
-        image: 'https://picsum.photos/200/300',
+        imgage: 'https://picsum.photos/200/300',
     },
 
     {
@@ -56,25 +57,9 @@ const HomePage = () => {
                 <i>The nerdest Book </i>
             </h2>
             <div className="row">
-                {books.map((book) => (
-                    <div className="col-12 col-md-6 col-lg-4" key={book.id}>
-                        <div className="card-image-top">
-                            <img
-                                src={book.imgage}
-                                className="card-img-top"
-                                alt="Book Cover"
-                            />
-                            <div className="card-body">
-                                <h3 className="text-primary">{book.title}</h3>
-                                <h4>{book.author}</h4>
-                                <p>{book.abstract}</p>
-                                <Link className="btn btn-primary" to={`/books/${book.id}`}>
-                                    Leggi Tutto
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                ))}
+                {books.map((book) => {
+                    return <BookCard book={book} />
+                })}
             </div>
         </div>
     );
