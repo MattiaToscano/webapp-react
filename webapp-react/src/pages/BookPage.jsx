@@ -49,10 +49,14 @@ const BookPage = () => {
     const { id } = useParams();
     const [books, setBooks] = useState(initialBooks);
 
+    const [book, setBook] = useState({});
     //Funzione che mi recupera l'array che ha l'id uguale a quello passato come parametro
     const fetchBook = () => {
-
-
+        books.forEach((actualBook) => {
+            if (actualBook.id === parseInt(id)) {
+                setBook(actualBook);
+            }
+        });
     }
 
 
