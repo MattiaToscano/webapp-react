@@ -11,6 +11,7 @@ function App() {
         <Route element={<DefaultLayout />}>
           <Route index element={<HomePage />}></Route>
           <Route path="/books/:id" element={<BookPage />}></Route>
+          <Route path="*" element={<NotFoundPage />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
