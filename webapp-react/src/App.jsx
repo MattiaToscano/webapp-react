@@ -1,6 +1,7 @@
 import DefaultLayout from './layouts/DefaultLayout';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+import BookPage from './pages/BookPage';
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <Routes>
         <Route element={<DefaultLayout />}>
           <Route index element={<HomePage />}></Route>
-          <Route path="/books/:id" element={<h1>Dettaglio Pagina</h1>}></Route>
+          <Route path="/books/:id" element={<BookPage />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
