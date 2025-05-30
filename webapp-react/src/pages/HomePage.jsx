@@ -1,7 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const initialBooks = [
+    {
+        id: 1,
+        title: 'Il Signore degli Anelli',
+        author: 'J.R.R. Tolkien',
+        abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
+        imgage: 'https://picsum.photos/200/300',
+    },
+
+    {
+        id: 1,
+        title: 'Il Signore degli Anelli',
+        author: 'J.R.R. Tolkien',
+        abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
+        imgage: 'https://picsum.photos/200/300',
+    },
+
+    {
+        id: 1,
+        title: 'Il Signore degli Anelli',
+        author: 'J.R.R. Tolkien',
+        abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
+        imgage: 'https://picsum.photos/200/300',
+    },
+
+    {
+        id: 1,
+        title: 'Il Signore degli Anelli',
+        author: 'J.R.R. Tolkien',
+        abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
+        imgage: 'https://picsum.photos/200/300',
+    },
+
     {
         id: 1,
         title: 'Il Signore degli Anelli',
