@@ -5,7 +5,11 @@ const DefaultLayout = () => {
     return (
         <>
             <Header></Header>
-            <main className='container'>/*Pagine che cambiano */</main>
+            <main className='container'>
+                <Outlet />
+            </main>
         </>
     )
 };
+
+export default DefaultLayout;
