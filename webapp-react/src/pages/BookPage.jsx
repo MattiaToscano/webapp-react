@@ -76,6 +76,8 @@ const initialReviews = [
 const BookPage = () => {
     const { id } = useParams();
     const [books] = useState(initialBooks);
+    const [reviews, setReviews] = useState(initialReviews);
+
     const [book, setBook] = useState({});
 
     //Funzione che mi recupera l'array che ha l'id uguale a quello passato come parametro
@@ -86,41 +88,49 @@ const BookPage = () => {
 
     useEffect(() => {
         fetchBook();
-    }, [id]); // Aggiunto id come dipendenza
+    }, []);
 
     return (
-        <div>
-            <div className="row">
-                <div className="col-12 col-md-6 col-lg-4">
-                    <img src={book.image} className="img-fluid" alt="Book Cover" />
+        <>
+            <div>
+                <div className="row">
+                    {book === null ? (
+                        `Caricamento in corso...`
+                    ) : (
+                        <>
+                            <div className="col-12 col-md-6 col-lg-4">
+                                <img src={book.image} className="img-fluid" alt="Book Cover" />
+                            </div>
+                            <div className="col-12 col-md-6 col-lg-8">
+                                <h1>{book.title}</h1>
+                                <p>{book.author}</p>
+                                <h3>{book.abstract}</h3>
+                            </div>
+                        </>
+                    )}
                 </div>
-                <div className="col-12 col-md-6 col-lg-8">
-                    <h1>{book.title}</h1>
-                    <p>{book.author}</p>
-                    <h3>{book.abstract}</h3>
-                </div>
-            </div>
 
-            <div className="row g-4">
-                <div className="d-flex justify-content-between">
-                    <h3>Our community reviews</h3>
-                </div>
-                <div className="col-12">
-                    <div className="card p-4">
-                        <p>Testo recensione</p>
-                        <p>Voto</p>
-                        <p>Autore</p>
+                <div className="row g-4">
+                    <div className="d-flex justify-content-between">
+                        <h3>Our community reviews</h3>
                     </div>
-                </div>
-                <div className="col-12">
-                    <div className="card p-4">
-                        <p>Testo recensione</p>
-                        <p>Voto</p>
-                        <p>Autore</p>
+                    <div className="col-12">
+                        <div className="card p-4">
+                            <p>Testo recensione</p>
+                            <p>Voto</p>
+                            <p>Autore</p>
+                        </div>
+                    </div>
+                    <div className="col-12">
+                        <div className="card p-4">
+                            <p>Testo recensione</p>
+                            <p>Voto</p>
+                            <p>Autore</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
