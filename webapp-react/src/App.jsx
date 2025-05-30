@@ -2,6 +2,7 @@ import DefaultLayout from './layouts/DefaultLayout';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import BookPage from './pages/BookPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
