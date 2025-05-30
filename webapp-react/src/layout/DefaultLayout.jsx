@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 const DefaultLayout = () => {
     return (
         <>
-            <header></header>
+            <Header></Header>
             <main className='container'>/*Pagine che cambiano */</main>
         </>
     )
