@@ -12,7 +12,7 @@ const initialBooks = [
     },
 
     {
-        id: 1,
+        id: 2,
         title: 'Il Signore degli Anelli',
         author: 'J.R.R. Tolkien',
         abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
@@ -20,7 +20,7 @@ const initialBooks = [
     },
 
     {
-        id: 1,
+        id: 3,
         title: 'Il Signore degli Anelli',
         author: 'J.R.R. Tolkien',
         abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
@@ -28,7 +28,7 @@ const initialBooks = [
     },
 
     {
-        id: 1,
+        id: 4,
         title: 'Il Signore degli Anelli',
         author: 'J.R.R. Tolkien',
         abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
@@ -36,7 +36,7 @@ const initialBooks = [
     },
 
     {
-        id: 1,
+        id: 5,
         title: 'Il Signore degli Anelli',
         author: 'J.R.R. Tolkien',
         abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
@@ -46,6 +46,9 @@ const initialBooks = [
 
 
 const HomePage = () => {
+    // Definisco la variabile di stato per i libri
+    const [books, setBooks] = useState(initialBooks);
+
     return (
         <div>
             <h1 className="text-primary">Bool Books </h1>
@@ -53,21 +56,25 @@ const HomePage = () => {
                 <i>The nerdest Book </i>
             </h2>
             <div className="row">
-                <div className="col-12 col-md-6 col-lg-4">
-                    <div className="card-image-top">
-                        <img
-                            src="https://picsum.photos/200/300"
-                            className="card-img-top"
-                            alt="Book Cover"
-                        />
-                        <div className="card-body">
-                            <h3 className="text-primary">Titolo </h3>
-                            <h4>Autore</h4>
-                            <p>Excerpt</p>
-                            <Link className="btn btn-primary" to="/books/5"> Leggi Tutto </Link>
+                {books.map((book) => (
+                    <div className="col-12 col-md-6 col-lg-4" key={book.id}>
+                        <div className="card-image-top">
+                            <img
+                                src={book.imgage}
+                                className="card-img-top"
+                                alt="Book Cover"
+                            />
+                            <div className="card-body">
+                                <h3 className="text-primary">{book.title}</h3>
+                                <h4>{book.author}</h4>
+                                <p>{book.abstract}</p>
+                                <Link className="btn btn-primary" to={`/books/${book.id}`}>
+                                    Leggi Tutto
+                                </Link>
+                            </div>
                         </div>
                     </div>
-                </div>
+                ))}
             </div>
         </div>
     );
