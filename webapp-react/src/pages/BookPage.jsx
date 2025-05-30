@@ -1,4 +1,4 @@
-import React, { act, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -9,7 +9,8 @@ const initialBooks = [
         title: 'Il Signore degli Anelli',
         author: 'J.R.R. Tolkien',
         abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
-        imgage: 'https://picsum.photos/200/300',
+        image: 'https://picsum.photos/200/300',
+
     },
 
     {
@@ -17,7 +18,8 @@ const initialBooks = [
         title: 'Il Signore degli Anelli',
         author: 'J.R.R. Tolkien',
         abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
-        imgage: 'https://picsum.photos/200/300',
+        image: 'https://picsum.photos/200/300',
+
     },
 
     {
@@ -25,7 +27,8 @@ const initialBooks = [
         title: 'Il Signore degli Anelli',
         author: 'J.R.R. Tolkien',
         abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
-        imgage: 'https://picsum.photos/200/300',
+        image: 'https://picsum.photos/200/300',
+
     },
 
     {
@@ -33,7 +36,8 @@ const initialBooks = [
         title: 'Il Signore degli Anelli',
         author: 'J.R.R. Tolkien',
         abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
-        imgage: 'https://picsum.photos/200/300',
+        image: 'https://picsum.photos/200/300',
+
     },
 
     {
@@ -41,42 +45,80 @@ const initialBooks = [
         title: 'Il Signore degli Anelli',
         author: 'J.R.R. Tolkien',
         abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
-        imgage: 'https://picsum.photos/200/300',
+        image: 'https://picsum.photos/200/300',
+        vote: 5
+    }
+]
+
+const initialReviews = [
+    {
+        id: 1,
+        text: 'Un libro fantastico, mi ha tenuto incollato fino all\'ultima pagina!',
+        vote: 3,
+    },
+    {
+        id: 1,
+        text: 'Un libro fantastico, mi ha tenuto incollato fino all\'ultima pagina!',
+        vote: 2,
+    },
+    {
+        id: 1,
+        text: 'Un libro fantastico, mi ha tenuto incollato fino all\'ultima pagina!',
+        vote: 1,
+    },
+    {
+        id: 1,
+        text: 'Un libro fantastico, mi ha tenuto incollato fino all\'ultima pagina!',
+        vote: 1231324,
     }
 ]
 
 const BookPage = () => {
     const { id } = useParams();
-    const [books, setBooks] = useState(initialBooks);
-
+    const [books] = useState(initialBooks);
     const [book, setBook] = useState({});
 
     //Funzione che mi recupera l'array che ha l'id uguale a quello passato come parametro
     const fetchBook = () => {
-        // books.forEach((actualBook) => {
-        //     if (actualBook.id === parseInt(id)) {
-        //        setBook(actualBook);
-        //     }
-        //  });
+        const findBook = books.find(actualBook => actualBook.id === parseInt(id));
+        setBook(findBook || {});
     }
-
-    const findBook = book.find(actualBook => actualBook.id === parseInt(id));
-    setBook(findBook);
 
     useEffect(() => {
         fetchBook();
-    }, []);
-
+    }, [id]); // Aggiunto id come dipendenza
 
     return (
-        <div className="row">
-            <div className="col-12 col-md-6 col-lg-4">
-                <img src={book.image} className="img-fluid" alt="Book Cover" />
+        <div>
+            <div className="row">
+                <div className="col-12 col-md-6 col-lg-4">
+                    <img src={book.image} className="img-fluid" alt="Book Cover" />
+                </div>
+                <div className="col-12 col-md-6 col-lg-8">
+                    <h1>{book.title}</h1>
+                    <p>{book.author}</p>
+                    <h3>{book.abstract}</h3>
+                </div>
             </div>
-            <div className="col-12 col-md-6 col-lg-8">
-                <h1>{book.title}</h1>
-                <p> {book.author}</p>
-                <h3>{book.ecserpt}</h3>
+
+            <div className="row g-4">
+                <div className="d-flex justify-content-between">
+                    <h3>Our community reviews</h3>
+                </div>
+                <div className="col-12">
+                    <div className="card p-4">
+                        <p>Testo recensione</p>
+                        <p>Voto</p>
+                        <p>Autore</p>
+                    </div>
+                </div>
+                <div className="col-12">
+                    <div className="card p-4">
+                        <p>Testo recensione</p>
+                        <p>Voto</p>
+                        <p>Autore</p>
+                    </div>
+                </div>
             </div>
         </div>
     )
