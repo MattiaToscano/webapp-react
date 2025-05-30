@@ -8,7 +8,7 @@ const initialBooks = [
         title: 'Il Signore degli Anelli',
         author: 'J.R.R. Tolkien',
         abstract: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
-        imgage: 'https://picsum.photos/200/300',
+        image: 'https://picsum.photos/200/300',
     },
 
     {
