@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import FilmCard from '../components/FilmCard'
+import FilmsCard from '../components/FilmsCard'
 import axios from 'axios'
 
 const Homepage = () => {
@@ -23,7 +23,7 @@ const Homepage = () => {
     }, [])
 
     return (
-        <>
+        <div className="container">  {/* Aggiunto container */}
             <h1 className='text-danger'>Boolflix</h1>
             <h2>
                 <i>Il tuo sito di streaming</i>
@@ -31,11 +31,10 @@ const Homepage = () => {
             <div className="row mt-4 gy-4">
                 {movies.map((movie) => {
                     const { id, title, author, excerpt, image } = movie
-                    return <FilmCard key={`film-${id}`} movie={movie} />
+                    return <FilmsCard key={`film-${id}`} movie={movie} />
                 })}
-
             </div>
-        </>
+        </div>
     )
 }
 

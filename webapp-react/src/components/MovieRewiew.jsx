@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ReviewCard = ({ review }) => {
+const MovieRewiew = ({ review }) => {
     const { text, vote, name } = review
     return (
         <div className="col-12">
@@ -13,4 +13,4 @@ const ReviewCard = ({ review }) => {
     )
 }
 
-export default ReviewCard;
+export default MovieRewiew;

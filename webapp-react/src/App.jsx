@@ -1,7 +1,7 @@
-import DefaultLayout from "./layouts/DefaultLayout"
+import DefaultLayout from "./layout/DefaultLayout"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Homepage from "./pages/HomePage"
-import FilmPage from "./pages/FilmPage"
+import MoviePage from "./pages/MoviePage"
 import NotFoundPage from "./pages/NotFoundPage"
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<DefaultLayout />}>
           <Route index element={<Homepage />} />
-          <Route path="movie/:id" element={<FilmPage />} />
+          <Route path="movie/:id" element={<MoviePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
