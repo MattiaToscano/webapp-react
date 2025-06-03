@@ -1,46 +1,66 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import axios from 'axios'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios';
-import MovieReviewsList from '../components/MovieRewiew';
+import ReviewCard from '../components/ReviewCard'
 
+const FilmPage = () => {
+    const { id } = useParams()
 
-
-
-
-const MoviePage = () => {
-    const { id } = useParams();
-    const [movie, setMovie] = useState(null);
-
-
-    //Funzione che mi recupera l'array che ha l'id uguale a quello passato come parametro
-    const fetchMovie = () => {
+    const [film, setFilm] = useState(null)
+    //function
+    const fetchFilm = () => {
         axios.get(`http://localhost:3000/api/movies/${id}`)
-            .then((resp) => {
-                setMovie(resp.data);
+            .then((response) => {
+                console.log(response.data)
+                setFilm(response.data)
             })
             .catch((error) => {
-                console.error("Errore nel recupero del film:", error);
-            });
+                console.log(error)
+            })
+    };
 
-        useEffect(() => {
-            fetchMovie();
-        }, []);
+    useEffect(() => {
+        fetchFilm()
+    }, [])
 
-        return (
-            <div>
-                <div className="row">
-                    <div className="col-12 col-md-6 col-lg-4">
-                        <img src={movie.poster} className="img-fluid" alt="Movie Poster" />
-                    </div>
-                    <div className="col-12 col-md-6 col-lg-8">
-                        <h1>{movie.title}</h1>
-                        <p>{movie.director}</p>
-                        <h3>{movie.synopsis}</h3>
-                    </div>
-                </div>
-                <MovieReview movieID={id} />
+    return (
+        <>
+            <div className='row'>
+                {film === null ? (
+                    <p>Caricamento dati</p>
+                ) : (
+                    <>
+                        <div className="col-12 col-md-6 col-lg-4">
+                            <img className='img-fluid' src={film.image} alt="" />
+                        </div>
+                        <div className="col-12 col-md-6 col-lg-8">
+                            <h1>{film.title}</h1>
+                            <h3>{film.author}</h3>
+                            <p>{film.excerpt}</p>
+                        </div>
+
+                        <div className="row gy-4">
+                            <div className="col-12">
+                                <div className="d-flex justify-content-between">
+                                    <h3>Our Community Reviews</h3>
+                                    <p>{film.average_vote}</p>
+                                </div>
+                            </div>
+                            {film.reviews.map((review) => {
+                                return (
+                                    <div className="col-12" key={`review-${review.id}`}>
+                                        <ReviewCard review={review} />
+                                    </div>
+                                )
+                            })}
+
+                        </div>
+                    </>
+                )}
             </div>
-        )
-    }
+        </>
+    )
 }
-export default MoviePage
+
+export default FilmPage

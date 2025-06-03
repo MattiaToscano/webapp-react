@@ -1,25 +1,21 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import HomePage from './pages/HomePage';
-import MoviePage from './pages/MoviePage';
-import NotFoundPage from './pages/NotFoundPage';
-
+import DefaultLayout from "./layouts/DefaultLayout"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Homepage from "./pages/HomePage"
+import FilmPage from "./pages/FilmPage"
+import NotFoundPage from "./pages/NotFoundPage"
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <NavBar />
-        <div className="container my-4">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/movies/:id" element={<MoviePage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </div>
-      </div>
-    </Router>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<DefaultLayout />}>
+          <Route index element={<Homepage />} />
+          <Route path="movie/:id" element={<FilmPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
