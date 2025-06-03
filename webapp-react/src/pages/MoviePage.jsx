@@ -13,7 +13,8 @@ const MoviePage = () => {
         axios.get(`http://localhost:3000/api/movies/${id}`)
             .then((response) => {
                 console.log('Movie data:', response.data)
-                setMovie(response.data)
+                const movieData = response.data.data || response.data
+                setMovie(movieData)
                 setLoading(false)
             })
             .catch((error) => {
@@ -72,31 +73,45 @@ const MoviePage = () => {
 
             <div className="row">
                 <div className="col-md-4">
-                    <img
-                        src={movie.image}
-                        alt={movie.title}
-                        className="img-fluid rounded shadow"
-                    />
+                    {movie.image && movie.image !== 'undefined' ? (
+                        <img
+                            src={`http://localhost:3000/img/movies/${movie.image}`}
+                            alt={movie.title}
+                            className="img-fluid rounded shadow"
+                            onError={(e) => {
+                                console.error('Failed to load image:', `http://localhost:3000/img/movies/${movie.image}`);
+                                e.target.style.display = 'none';
+                            }}
+                        />
+                    ) : (
+                        <div className="alert alert-info d-flex align-items-center justify-content-center">
+                            <div className="text-center">
+                                <i className="bi bi-image" style={{ fontSize: '3rem' }}></i>
+                                <p className="mt-2 mb-0">Immagine non disponibile</p>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div className="col-md-8">
                     <h1 className="text-danger mb-3">{movie.title}</h1>
                     <h3 className="text-muted mb-3">
-                        <em>di {movie.author}</em>
+                        <em>di {movie.director}</em>
                     </h3>
                     <div className="mb-4">
                         <h5>Descrizione:</h5>
-                        <p className="lead">{movie.excerpt}</p>
+                        <p className="lead">{movie.abstract}</p>
                     </div>
-                    {movie.description && (
-                        <div className="mb-4">
-                            <h5>Trama completa:</h5>
-                            <p>{movie.description}</p>
-                        </div>
-                    )}
                     {movie.genre && (
                         <div className="mb-3">
                             <span className="badge bg-danger fs-6">
                                 {movie.genre}
+                            </span>
+                        </div>
+                    )}
+                    {movie.release_year && (
+                        <div className="mb-3">
+                            <span className="badge bg-secondary fs-6">
+                                {movie.release_year}
                             </span>
                         </div>
                     )}

@@ -30,7 +30,7 @@ const Homepage = () => {
             </h2>
             <div className="row mt-4 gy-4">
                 {movies.map((movie) => {
-                    const { id, title, author, excerpt, image } = movie
+                    const { id, title, director, genre, abstract, image } = movie; // Campi corretti
                     return <FilmsCard key={`film-${id}`} movie={movie} />
                 })}
             </div>
