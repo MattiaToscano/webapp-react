@@ -3,7 +3,7 @@ import NavBar from './components/NavBar';
 import HomePage from './pages/HomePage';
 import MoviePage from './pages/MoviePage';
 import NotFoundPage from './pages/NotFoundPage';
-import './App.css';
+
 
 function App() {
   return (

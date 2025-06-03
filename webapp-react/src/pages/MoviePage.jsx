@@ -67,26 +67,6 @@ const MoviePage = () => {
                     <h3>{movie.synopsis}</h3>
                 </div>
             </div>
-
-            <div className="row g-4">
-                <div className="d-flex justify-content-between">
-                    <h3>Our community reviews</h3>
-                </div>
-                <div className="col-12">
-                    <div className="card p-4">
-                        <p>Testo recensione</p>
-                        <p>Voto</p>
-                        <p>Autore</p>
-                    </div>
-                </div>
-                <div className="col-12">
-                    <div className="card p-4">
-                        <p>Testo recensione</p>
-                        <p>Voto</p>
-                        <p>Autore</p>
-                    </div>
-                </div>
-            </div>
         </div>
     )
 }
