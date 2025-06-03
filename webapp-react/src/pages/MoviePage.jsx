@@ -75,11 +75,11 @@ const MoviePage = () => {
                 <div className="col-md-4">
                     {movie.image && movie.image !== 'undefined' ? (
                         <img
-                            src={`http://localhost:3000/img/movies/${movie.image}`}
+                            src={`http://localhost:3000/img/${movie.image}`}
                             alt={movie.title}
                             className="img-fluid rounded shadow"
                             onError={(e) => {
-                                console.error('Failed to load image:', `http://localhost:3000/img/movies/${movie.image}`);
+                                console.error('Failed to load image:', e.target.src);
                                 e.target.style.display = 'none';
                             }}
                         />

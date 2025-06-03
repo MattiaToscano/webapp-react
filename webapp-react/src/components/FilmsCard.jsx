@@ -16,10 +16,11 @@ const FilmCard = ({ movie }) => {
                 <div className="card-image-top">
                     {image && image !== "undefined" ? (
                         <img
-                            className="img-fluid"
-                            src={`http://localhost:3000/img/movies/${movie.image}`}
+                            src={`http://localhost:3000/img/${movie.image}`}
                             alt={movie.title}
+                            className="img-fluid rounded shadow"
                             onError={(e) => {
+                                console.error('Failed to load image:', e.target.src);
                                 e.target.style.display = 'none';
                             }}
                         />
