@@ -10,7 +10,7 @@ const HomePage = () => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:3000/api/movies')
+        axios.get('http://127.0.0.1:3000/api/movies')
             .then((resp) => {
                 setMovies(resp.data);
             })
