@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import axios from 'axios';
+import MovieReviewsList from '../components/MovieRewiew';
+
+
 
 
 
 const MoviePage = () => {
     const { id } = useParams();
-    const [movies] = useState(initialMovies);
-    const [movie, setMovie] = useState({});
+    const [movie, setMovie] = useState(null);
+
 
     //Funzione che mi recupera l'array che ha l'id uguale a quello passato come parametro
     const fetchMovie = () => {
-        axios.get(`http://127.0.0.1:3000/api/movies/${id}`)
+        axios.get(`http://localhost:3000/api/movies/${id}`)
             .then((resp) => {
                 setMovie(resp.data);
             })
@@ -20,7 +24,7 @@ const MoviePage = () => {
 
         useEffect(() => {
             fetchMovie();
-        }, [id]);
+        }, []);
 
         return (
             <div>
@@ -34,6 +38,7 @@ const MoviePage = () => {
                         <h3>{movie.synopsis}</h3>
                     </div>
                 </div>
+                <MovieReview movieID={id} />
             </div>
         )
     }
