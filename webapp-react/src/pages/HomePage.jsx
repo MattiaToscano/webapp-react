@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+
+import { } from 'react'
 
 const initialMovies = [
     {
@@ -13,7 +16,17 @@ const initialMovies = [
 ]
 
 const HomePage = () => {
-    const [movies] = useState(initialMovies);
+    const [movies, setMovies] = useState(initialMovies);
+
+    useEffect(() => {
+        axios.get('https://127.0.0.1:3000/movies')
+            .then((resp) => {
+                console.log(resp.data);
+            })
+            .catch((error) => {
+                console.error("Errore nel recupero dei film:", error);
+            });
+    }, []);
 
     return (
         <div className="container">
