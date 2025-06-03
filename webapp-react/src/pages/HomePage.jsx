@@ -4,24 +4,15 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 
-const initialMovies = [
-    {
-        id: 1,
-        title: 'Il Signore degli Anelli',
-        director: 'Peter Jackson',
-        synopsis: 'Un epico racconto di avventura e amicizia in un mondo fantastico.',
-        poster: 'https://picsum.photos/200/300',
-    },
-    // altri film...
-]
+
 
 const HomePage = () => {
-    const [movies, setMovies] = useState(initialMovies);
+    const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:3000/movies')
+        axios.get('https://127.0.0.1:3000/api/movies')
             .then((resp) => {
-                console.log(resp.data);
+                setMovies(resp.data);
             })
             .catch((error) => {
                 console.error("Errore nel recupero dei film:", error);
