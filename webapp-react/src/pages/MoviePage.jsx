@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams, Link } from 'react-router-dom'
+import ReviewsList from '../components/RewiewsList'
 
 const MoviePage = () => {
     const { id } = useParams()
     const [movie, setMovie] = useState(null)
+    const [reviews, setReviews] = useState([])
     const [loading, setLoading] = useState(true)
+    const [reviewsLoading, setReviewsLoading] = useState(true)
     const [error, setError] = useState(null)
 
+    // Funzione per caricare i dettagli del film
     const fetchMovie = () => {
         setLoading(true)
         axios.get(`http://localhost:3000/api/movies/${id}`)
@@ -24,8 +28,26 @@ const MoviePage = () => {
             })
     }
 
+    // Funzione per caricare le recensioni
+    const fetchReviews = () => {
+        setReviewsLoading(true)
+        axios.get(`http://localhost:3000/api/movies/${id}/reviews`)
+            .then((response) => {
+                console.log('Reviews data:', response.data)
+                const reviewsData = response.data.data || response.data
+                setReviews(reviewsData || [])
+                setReviewsLoading(false)
+            })
+            .catch((error) => {
+                console.error('Error fetching reviews:', error)
+                setReviews([])
+                setReviewsLoading(false)
+            })
+    }
+
     useEffect(() => {
         fetchMovie()
+        fetchReviews()
     }, [id])
 
     if (loading) {
@@ -35,7 +57,7 @@ const MoviePage = () => {
                     <div className="spinner-border text-danger" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
-                    <p className="mt-2">Caricamento...</p>
+                    <p className="mt-2">Caricamento film...</p>
                 </div>
             </div>
         )
@@ -66,7 +88,7 @@ const MoviePage = () => {
     }
 
     return (
-        <div className="container mt-4">
+        <div className="container py-4">
             <Link to="/" className="btn btn-outline-danger mb-3">
                 ← Torna alla Home
             </Link>
@@ -117,6 +139,30 @@ const MoviePage = () => {
                     )}
                 </div>
             </div>
+
+            {/* Sezione recensioni */}
+            {reviewsLoading ? (
+                <div className="mt-4 text-center">
+                    <div className="spinner-border text-secondary" role="status">
+                        <span className="visually-hidden">Caricamento recensioni...</span>
+                    </div>
+                    <p className="mt-2">Caricamento recensioni...</p>
+                </div>
+            ) : (
+                <>
+                    {console.log('Rendering reviews:', reviews)}
+                    {reviews && reviews.length > 0 ? (
+                        <ReviewsList reviews={reviews} />
+                    ) : (
+                        <div className="mt-5">
+                            <h3 className="mb-4">Recensioni</h3>
+                            <div className="alert alert-info">
+                                Nessuna recensione disponibile. Sii il primo a recensire!
+                            </div>
+                        </div>
+                    )}
+                </>
+            )}
         </div>
     )
 }

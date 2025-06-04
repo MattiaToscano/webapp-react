@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Homepage from "./pages/HomePage"
 import MoviePage from "./pages/MoviePage"
 import NotFoundPage from "./pages/NotFoundPage"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
