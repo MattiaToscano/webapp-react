@@ -18,6 +18,13 @@ const ReviewForms = () => {
         setFormData({ ...formData, [name]: value });
     };
 
+    //Metodo che effettual la chiamata ajax per salvare la recensione
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        //Chiamata ajax per inviare la recensione\
+        axios.post(`http://localhost:3000/api/movies/${formData.movieId}/reviews`, formData)
+    }
+
     return (
         <div className="card">
             <div className="card-header">
@@ -27,11 +34,11 @@ const ReviewForms = () => {
                 <form>
                     <div className="form-group">
                         <label htmlFor="vote">Voto</label>
-                        <input type="text" className="form-control" name="vote" placeholder="voto" required value={formData.name} />
+                        <input type="text" className="form-control" name="vote" placeholder="voto" required value={formData.name} onChange={setFieldValue} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="reviewText">Scrivi la tua recensione</label>
-                        <textarea className="form-control" name="reviewText" rows="3" placeholder="La tua recensione" required></textarea>
+                        <textarea className="form-control" name="reviewText" rows="3" placeholder="La tua recensione" required value={formData.name} onChange={setFieldValue}></textarea>
                     </div>
                 </form>
             </div>
