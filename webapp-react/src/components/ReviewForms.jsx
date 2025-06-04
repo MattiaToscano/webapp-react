@@ -2,8 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 
-
-const ReviewForms = () => {
+const ReviewForms = ({ movieId, onReviewAdded }) => {
     //definizione dello stato per la recensione
     const initialData = { name: '', vote: '', reviewText: '' };
 
@@ -21,9 +20,15 @@ const ReviewForms = () => {
     //Metodo che effettual la chiamata ajax per salvare la recensione
     const handleSubmit = (e) => {
         e.preventDefault();
-        //Chiamata ajax per inviare la recensione\
-        axios.post(`http://localhost:3000/api/movies/${formData.movieId}/reviews`, formData)
-    }
+
+        //Chiamata ajax per inviare la recensione
+        axios.post(`http://localhost:3000/api/movies/${movieId}/reviews`, formData, {
+            headers: { 'Content-Type': 'application/json' }
+        }).then(() => {
+            setFormData(initialData); // Reset del form dopo l'invio
+            if (onReviewAdded) onReviewAdded();
+        });
+    };
 
     return (
         <div className="card">
@@ -31,20 +36,24 @@ const ReviewForms = () => {
                 <h4> Aggiungi la tua recensione</h4>
             </div>
             <div className="card-body">
-                <form>
-                    <div className="form-group">
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group mb-3">
+                        <label htmlFor="name">Nome</label>
+                        <input type="text" className="form-control" name="name" placeholder="Il tuo nome" value={formData.name} onChange={setFieldValue} />
+                    </div>
+                    <div className="form-group mb-3">
                         <label htmlFor="vote">Voto</label>
-                        <input type="text" className="form-control" name="vote" placeholder="voto" required value={formData.name} onChange={setFieldValue} />
+                        <input type="number" className="form-control" name="vote" placeholder="voto" required value={formData.vote} onChange={setFieldValue} />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group mb-3">
                         <label htmlFor="reviewText">Scrivi la tua recensione</label>
-                        <textarea className="form-control" name="reviewText" rows="3" placeholder="La tua recensione" required value={formData.name} onChange={setFieldValue}></textarea>
+                        <textarea className="form-control" name="reviewText" rows="3" placeholder="La tua recensione" required value={formData.reviewText} onChange={setFieldValue}></textarea>
                     </div>
+                    <button type="submit" className="btn btn-primary">Invia recensione</button>
                 </form>
             </div>
         </div>
-    )
-}
-
+    );
+};
 
 export default ReviewForms

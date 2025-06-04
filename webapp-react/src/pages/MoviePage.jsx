@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams, Link } from 'react-router-dom'
 import ReviewsList from '../components/RewiewsList'
+import ReviewForms from '../components/ReviewForms'
 
 const MoviePage = () => {
     const { id } = useParams()
@@ -163,6 +164,7 @@ const MoviePage = () => {
                     )}
                 </>
             )}
+            <ReviewForms movieId={id} onReviewAdded={fetchReviews} />
         </div>
     )
 }
