@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import FilmsCard from '../components/FilmsCard'
 import axios from 'axios'
+import Loader from '../components/Loader'
 
 const Homepage = () => {
 
