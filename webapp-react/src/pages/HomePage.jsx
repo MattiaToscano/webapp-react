@@ -3,10 +3,12 @@ import { useState, useEffect } from 'react'
 import FilmsCard from '../components/FilmsCard'
 import axios from 'axios'
 import Loader from '../components/Loader'
+import GlobalContext from '../context/globalContext'
 
 const Homepage = () => {
 
     const [movies, setMovies] = useState([])
+    const { isLoading, setIsLoading } = React.useContext(GlobalContext); // Consumo il contesto globale
 
     const fetchMovies = () => {
         axios.get('http://localhost:3000/api/movies')

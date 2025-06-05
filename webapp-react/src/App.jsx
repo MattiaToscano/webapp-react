@@ -8,9 +8,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import GlobalContext from "./context/globalContext"
 
 function App() {
-  return (
 
-    <GlobalContext>
+  const [isLoading, setIsLoading] = useState(false);
+
+
+
+  return (
+    <GlobalContext.Provider value={{ isLoading, setIsLoading }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<DefaultLayout />}>
@@ -21,7 +25,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </GlobalContext>
+    </GlobalContext.Provider>
   )
 }
 
