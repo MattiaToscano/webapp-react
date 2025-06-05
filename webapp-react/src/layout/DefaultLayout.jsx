@@ -14,7 +14,9 @@ function DefaultLayout() {
             <main className="container">
                 <Outlet />
             </main>
-            { }
+            {Loader && isLoading && (
+                <Loader /> // Mostra il loader se isLoading è true
+            )}
         </>
     )
 }

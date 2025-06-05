@@ -6,6 +6,7 @@ import NotFoundPage from "./pages/NotFoundPage"
 import CreateFilmsPage from "./pages/CreateFilmsPage"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GlobalContext from "./context/globalContext"
+import Loader from "./components/Loader"
 
 function App() {
 
