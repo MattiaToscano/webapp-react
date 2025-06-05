@@ -10,7 +10,9 @@ const Homepage = () => {
     const [movies, setMovies] = useState([])
     const { isLoading, setIsLoading } = React.useContext(GlobalContext); // Consumo il contesto globale
 
+
     const fetchMovies = () => {
+        setIsLoading(true); // Imposto isLoading a true prima della richiesta
         axios.get('http://localhost:3000/api/movies')
             .then((response) => {
                 console.log(response.data)

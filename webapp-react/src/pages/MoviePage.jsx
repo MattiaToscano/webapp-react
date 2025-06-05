@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useParams, Link } from 'react-router-dom'
 import ReviewsList from '../components/RewiewsList'
 import ReviewForms from '../components/ReviewForms'
+import GlobalContext from '../context/globalContext'
+
 
 const MoviePage = () => {
     const { id } = useParams()
@@ -11,6 +13,7 @@ const MoviePage = () => {
     const [loading, setLoading] = useState(true)
     const [reviewsLoading, setReviewsLoading] = useState(true)
     const [error, setError] = useState(null)
+    const { isLoading, setIsLoading } = React.useContext(GlobalContext); // Consumo il contesto globale
 
     // Funzione per caricare i dettagli del film
     const fetchMovie = () => {
